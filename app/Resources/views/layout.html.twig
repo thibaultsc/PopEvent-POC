@@ -1,0 +1,304 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}Pop Event{% endblock %}</title>
+
+  {% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/main2.css') }}" type="text/css" />
+    <link rel="stylesheet" href="http://harvesthq.github.io/chosen/chosen.css" type="text/css" />
+
+    
+  {% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar "></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <button type="button" class=" navbar-cart collapsed visible-xs visible-sm">
+            <span class="icon-bar "><a class="glyphicon glyphicon-shopping-cart" href="{{ path('ts_app_product_wishlist') }}" style="color:white;"></a></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ path('ts_app_home') }}">Pop Event</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="{{ path('ts_app_home') }}">Accueil <span class="sr-only">(current)</span></a></li>
+            {% if is_granted('ROLE_USER') %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mon Compte : {{ app.user.username }}<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ path('ts_app_user_profile', {'username': app.user.username}) }}">Mon profil / Qr code</a></li>
+                <li><a href="{{ path('ts_app_event_listuser') }}">Mes inscriptions</a></li>
+                <li><a href="">Mes achats</a></li>
+                <li><a href="{{ path('ts_app_product_listuser') }}">Mes ventes</a></li>
+                <li><a href="">Changer mon mot de passe</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ path('ts_app_product_add') }}">Vendre un produit</a></li>
+            <li><a href="{{ path('ts_app_product_wishlist') }}">Mes produits favoris</a></li>
+            <li class="hidden-xs hidden-sm"><a href="{{ path('ts_app_product_wishlist') }}"><i class="glyphicon glyphicon-shopping-cart"></i> Mon panier</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ path('ts_app_product_validate') }}">Valider les produits</a></li>
+                <li><a href="{{ path('ts_app_event_add') }}">Ajouter un événement</a></li>
+              </ul>
+            </li>
+            {% endif %}
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ path('ts_app_help') }}">Aide / Nous contacter</a></li>          
+            <li><a href="{{ path('fos_user_security_logout') }}">Se déconnecter</a></li>
+          </ul>
+          {% else %}
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ path('ts_app_help') }}">Aide / Nous contacter</a></li>             
+            <li><a href="{{ path('fos_user_security_login') }}">Se connecter / Créer son compte</a></li>
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+  <div class="container">
+
+    
+
+      <div id="content" >
+          <div style="margin-bottom:70px"></div>
+        {% block body %}
+        {% endblock %}
+      </div>
+    
+
+    <hr>
+
+    <footer>
+      <p>Produced by Thibault © {{ 'now'|date('Y') }} </p>
+    </footer>
+  </div>
+
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+var firstclick = "1";
+    function like(id)
+    {
+        var theElement = document.getElementById('f'+id);
+        var theElements1 = document.getElementById('fs'+id);
+        var theElementb1 = document.getElementById('fb'+id);
+        
+        var a;
+        if (theElement) {a = theElement.dataset.like;}
+        if (theElementb1) {if (a == null) {a = theElementb1.dataset.like;}}
+        if (theElements1) {if (a == null) {a = theElements1.dataset.like;}}
+        
+        
+        if (a === "1") 
+        {
+            if (theElement) {theElement.innerHTML = '<i class="glyphicon glyphicon-heart-empty"></i> Ajouter';
+            theElement.className = "btn btn-default";
+            theElement.dataset.like = 0;}
+            if (theElementb1) {theElementb1.innerHTML = '<i class="glyphicon glyphicon-heart-empty"></i> Ajouter';
+            theElementb1.className = "btn btn-default btn-xs";
+            theElementb1.dataset.like = 0;}
+            if (theElements1) {theElements1.innerHTML = '<i class="glyphicon glyphicon-heart-empty"></i> Ajouter';
+            theElements1.className = "btn btn-default btn-xs";
+            theElements1.dataset.like = 0;}
+        }    
+        else
+        {
+            if (theElement) {theElement.innerHTML = '<i class="glyphicon glyphicon-heart"></i> Favoris';
+            theElement.className = "btn btn-danger";
+            theElement.dataset.like = 1;}
+            if (theElementb1) {theElementb1.innerHTML = '<i class="glyphicon glyphicon-heart"></i> Favoris';
+            theElementb1.className = "btn btn-danger btn-xs";
+            theElementb1.dataset.like = 1;}
+            if (theElements1) {theElements1.innerHTML = '<i class="glyphicon glyphicon-heart"></i> Favoris';
+            theElements1.className = "btn btn-danger btn-xs";
+            theElements1.dataset.like = 1;}
+        }
+        var href = $(theElement).data('href');
+        if (href ==null) {href = $(theElementb1).data('href');}
+        if (href ==null) {href = $(theElements1).data('href');}
+        $.get(href);
+    }
+    function choose(id)
+    {
+        if (firstclick === "1")
+        {
+            firstclick = 0;
+            var theElement = document.getElementById('chs'+id);
+            var theElementb = document.getElementById('chb'+id);
+            var a;
+            a = theElement.dataset.choose;
+            if (a === "1") 
+            {
+                theElement.innerHTML = 'Choisir';
+                theElement.className = "btn btn-default";
+                theElement.dataset.choose = 0;
+                theElementb.innerHTML = 'Choisir';
+                theElementb.className = "btn btn-default";
+                theElementb.dataset.choose = 0;
+            }    
+            else
+            {
+                theElement.innerHTML = '<i class="glyphicon glyphicon-qrcode"></i> Associé';
+                theElement.className = "btn btn-success btn-xs";
+                theElement.dataset.choose = 1;
+                theElementb.innerHTML = '<i class="glyphicon glyphicon-qrcode"></i> Associé';
+                theElementb.className = "btn btn-success btn-xs";
+                theElementb.dataset.choose = 1;
+            }
+            var href = $(theElement).data('href');
+             $.get(href);
+             window.location.replace("{{ path('ts_app_home') }}");
+        }
+    }
+    function confirm(id)
+    {
+            var theElement = document.getElementById('c'+id);
+            var theElementb = document.getElementById('cb'+id);
+            var theElements = document.getElementById('cs'+id);
+            var a;
+            if (theElement) {a = theElement.dataset.confirm;}
+            if (theElementb) {if (a==null) {a = theElementb.dataset.confirm;}}
+            if (theElements) {if (a==null) {a = theElements.dataset.confirm;}}
+            
+            if (a === "1") 
+            {
+                //rajouter un message 
+            }    
+            else
+            {
+                if (theElement) {theElement.innerHTML = '<i class="glyphicon glyphicon-qrcode"></i> En validation';
+                theElement.className = "btn btn-success";
+                theElement.dataset.confirm = 1;}
+                if (theElementb) {theElementb.innerHTML = '<i class="glyphicon glyphicon-qrcode"></i> En validation';
+                theElementb.className = "btn btn-success btn-xs";
+                theElementb.dataset.confirm = 1;}
+                if (theElements) {theElements.innerHTML = '<i class="glyphicon glyphicon-qrcode"></i> En validation';
+                theElements.className = "btn btn-success btn-xs";
+                theElements.dataset.confirm = 1;}
+            }
+        var href = $(theElement).data('href');
+        if (href ==null) {href = $(theElementb).data('href');}
+        if (href ==null) {href = $(theElements).data('href');}
+            
+            
+             $.get(href);
+             
+        
+    }
+    function validate(id)
+    {
+        var theElementv = document.getElementById('v'+id);
+        var theElementu = document.getElementById('u'+id);
+        var theElementbv = document.getElementById('vb'+id);
+        var theElementsv = document.getElementById('vs'+id);
+        var theElementbu = document.getElementById('ub'+id);
+        var theElementsu = document.getElementById('us'+id);
+        if (theElementv){
+            theElementv.innerHTML = '<i class="glyphicon glyphicon-ok"></i> Validé';
+            theElementv.className = "btn btn-success";
+        }
+        if (theElementu){
+            theElementu.innerHTML = '<i class="glyphicon glyphicon-ok"></i> Refuser';
+            theElementu.className = "btn btn-default";
+        }
+        if (theElementbv){
+            theElementbv.innerHTML = '<i class="glyphicon glyphicon-ok"></i> Validé';
+            theElementbv.className = "btn btn-success btn-xs";
+        }
+        if (theElementsv){
+            theElementsv.innerHTML = '<i class="glyphicon glyphicon-ok"></i> Validé';
+            theElementsv.className = "btn btn-success btn-xs";
+        }
+        if (theElementbu){
+            theElementbu.innerHTML = '<i class="glyphicon glyphicon-remove"></i> Refuser';
+            theElementbu.className = "btn btn-default btn-xs";
+        }
+        if (theElementsu){
+            theElementsu.innerHTML = '<i class="glyphicon glyphicon-remove"></i> Refuser';
+            theElementsu.className = "btn btn-default btn-xs";
+        }
+        var href = $(theElementv).data('href');
+        if (href ==null) {href = $(theElementbv).data('href');}
+        if (href ==null) {href = $(theElementsv).data('href');}
+         $.get(href);
+        
+    }
+    function unvalidate(id)
+    {
+        var theElementv = document.getElementById('v'+id);
+        var theElementu = document.getElementById('u'+id);
+        var theElementbv = document.getElementById('vb'+id);
+        var theElementsv = document.getElementById('vs'+id);
+        var theElementbu = document.getElementById('ub'+id);
+        var theElementsu = document.getElementById('us'+id);
+        if (theElementv){
+            theElementv.innerHTML = '<i class="glyphicon glyphicon-ok"></i> Valider';
+            theElementv.className = "btn btn-default";
+        }
+        if (theElementu){
+            theElementu.innerHTML = '<i class="glyphicon glyphicon-ok"></i> Refusé';
+            theElementu.className = "btn btn-danger";
+        }
+        if (theElementbv){
+            theElementbv.innerHTML = '<i class="glyphicon glyphicon-ok"></i> Valider';
+            theElementbv.className = "btn btn-default btn-xs";
+        }
+        if (theElementsv){
+            theElementsv.innerHTML = '<i class="glyphicon glyphicon-ok"></i> Valider';
+            theElementsv.className = "btn btn-default btn-xs";
+        }
+        if (theElementbu){
+            theElementbu.innerHTML = '<i class="glyphicon glyphicon-remove"></i> Refusé';
+            theElementbu.className = "btn btn-danger btn-xs";
+        }
+        if (theElementsu){
+            theElementsu.innerHTML = '<i class="glyphicon glyphicon-remove"></i> Refusé';
+            theElementsu.className = "btn btn-danger btn-xs";
+        }
+        var href = $(theElementu).data('href');
+        if (href ==null) {href = $(theElementbu).data('href');}
+        if (href ==null) {href = $(theElementsu).data('href');}
+         $.get(href);
+        
+    }    
+</script>  
+<input type="hidden" id="refreshed" value="no">
+<script type="text/javascript">
+onload=function(){
+var e=document.getElementById("refreshed");
+if(e.value=="no")e.value="yes";
+else{e.value="no";location.reload();}
+}
+</script>
+  <script src="http://harvesthq.github.io/chosen/chosen.jquery.js" type="text/javascript"></script>
+
+  {% endblock %}
+
+</body>
+</html>

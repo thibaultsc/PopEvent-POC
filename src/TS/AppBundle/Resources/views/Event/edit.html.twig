@@ -1,0 +1,115 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'un évènement - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+<div class="well">
+  
+<form  class="form-horizontal" action="{{ path('ts_app_event_edit', {'id': event.id}) }}" 
+       {{ form_enctype(form) }} method="POST">
+    <fieldset>
+    <legend>Modification évènement</legend>
+    <div  id="fos_user_registration_form">
+        
+        <div class="form-group">
+        <label class="col-lg-2 control-label">Nom de l'évènement</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.name, { 'attr': {'class': 'form-control', 'placeholder': "Titre de l'évènement"} }) }}
+        {{ form_errors(form.name) }}
+        </div>
+        </div>
+        <div class="form-group">
+        <label class="col-lg-2 control-label">Description de l'évènement</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.description, { 'attr': {'class': 'form-control', 'placeholder': "Décrire l'évènement "} }) }}
+        {{ form_errors(form.description) }}
+        </div>
+        </div>
+        <div class="form-group">
+        <label class="col-lg-2 control-label">Date de l'évènement</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.dateevent, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(form.dateevent) }}
+        </div>
+        </div>
+                
+        <div class="form-group">
+      <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Image de l'évènement</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.image.file, { 'attr': {'class': 'form-control', 'placeholder': "Importer uniquement pour écraser " }}) }}
+        {{ form_errors(form.image.file) }}
+        </div>
+        </div>
+        
+         <div class="form-group">
+      <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Détails sur les horaires</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.datehoraire, { 'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.datehoraire) }}
+        </div>
+        </div>  
+        
+        <div class="form-group">
+      <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Détails sur l'adresse</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.address, { 'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.address) }}
+        </div>
+        </div>
+        
+        <div class="form-group">
+      <label for="select" class="col-lg-2 control-label">Début des inscription</label>
+      <div class="col-lg-10">
+          {{ form_widget(form.datebegin, { 'attr': {'class': 'form-control' }}) }}
+          {{ form_errors(form.datebegin) }}
+      </div>
+    </div>
+
+        
+        <div class="form-group">
+        <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Fin des inscriptions</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.dateend, { 'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.dateend) }}
+        </div>
+        </div>
+
+        
+        <div class="form-group">
+        <label for="inputUsername" class="col-lg-2 control-label">Prix normal</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.priceplace, { 'attr': {'class': 'form-control', 'placeholder': 'Prix de vente'} }) }}
+        {{ form_errors(form.priceplace) }}
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="inputUsername" class="col-lg-2 control-label">Prix Vendeur</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.pricesalesman, { 'attr': {'class': 'form-control', 'placeholder': 'Prix de vente'} }) }}
+        {{ form_errors(form.pricesalesman) }}
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="inputUsername" class="col-lg-2 control-label">Actif</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.enabled) }}
+        {{ form_errors(form.enabled) }}
+        </div>
+        </div>
+        
+
+        {{ form_rest(form) }}
+
+    </div>
+      <div style="text-align: center;">
+    <input class="btn btn-primary"  type="submit" value="Modifier l'évènement" />
+      </div>
+     </fieldset>
+</form>
+  
+</div>
+
+{% endblock %}

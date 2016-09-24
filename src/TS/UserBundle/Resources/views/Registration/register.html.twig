@@ -1,0 +1,19 @@
+{# src/OC/UserBundle/Resources/views/Security/login.html.twig #}
+
+{% extends "::layout.html.twig" %}
+
+{% block body %}
+
+  {# S'il y a une erreur, on l'affiche dans un joli cadre #}
+
+  {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+  {{ include('TSUserBundle:Registration:registerform.html.twig') }}
+    </div>
+  <div class="row-space-4 hidden-lg hidden-md"></div>
+  <div class="col-md-6 col-sm-12">
+  {{ include('TSUserBundle:Security:loginform.html.twig') }}
+</div>
+</div>
+{% endblock %}

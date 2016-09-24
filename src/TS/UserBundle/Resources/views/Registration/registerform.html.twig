@@ -1,0 +1,58 @@
+
+
+<form  class="form-horizontal" action="{{ path('ts_user_register') }}" 
+       {{ form_enctype(form_registration) }} method="POST">
+    <fieldset>
+    <legend>Formulaire d'inscription</legend>
+    <div  id="fos_user_registration_form">
+        
+        <div class="form-group">
+        <label class="col-lg-2 control-label">Email</label>
+        <div class="col-lg-10">
+        {{ form_widget(form_registration.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'} }) }}
+        {% if form_errors(form_registration.email)%}<div class="alert alert-danger ">{{ form_errors(form_registration.email) }}</div>{% endif %}
+        </div>
+        </div>
+        
+        <div class="form-group">
+        <label class="col-lg-2 control-label">Téléphone</label>
+        <div class="col-lg-10">
+        {{ form_widget(form_registration.phoneNumber, { 'attr': {'class': 'form-control', 'placeholder': 'Téléphone'} }) }}
+        {% if form_errors(form_registration.phoneNumber)%}<div class="alert alert-danger">{{ form_errors(form_registration.phoneNumber) }}</div>{% endif %}
+        </div>
+        </div>
+        
+        <div class="form-group">
+        <label for="inputUsername" class="col-lg-2 control-label">Pseudo</label>
+        <div class="col-lg-10">
+        {{ form_widget(form_registration.username, { 'attr': {'class': 'form-control', 'placeholder': 'Pseudo', 'id':'inputUsername', 'name':'_username' } }) }}
+        {% if form_errors(form_registration.username)%}<div class="alert alert-danger">{{ form_errors(form_registration.username) }}</div>{% endif %}
+        </div>
+        </div>
+        
+        <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">Mot de Passe</label>
+        <div class="col-lg-10">
+        {{ form_widget(form_registration.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'} }) }}
+        {% if form_errors(form_registration.plainPassword.first)%}<div class="alert alert-danger">{{ form_errors(form_registration.plainPassword.first) }}</div>{% endif %}
+        </div>
+        </div>
+        
+        <div class="form-group">
+      <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Confirmation Mot de Passe</label>
+        <div class="col-lg-10">
+        {{ form_widget(form_registration.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Mot de Passe' } }) }}
+        {% if form_errors(form_registration.plainPassword.second)%}<div class="alert alert-danger">{{ form_errors(form_registration.plainPassword.second) }}</div>{% endif %}
+        </div>
+        </div>
+        
+        
+        {{ form_rest(form_registration) }}
+
+    </div>
+      <div style="text-align: center;">
+    <input class="btn btn-primary"  type="submit" value="Inscription" />
+      </div>
+     </fieldset>
+</form>
+  

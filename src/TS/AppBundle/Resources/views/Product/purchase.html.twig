@@ -1,0 +1,46 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'un produit - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+    <div class="margin-bottom-50"></div>
+{% if is_granted('ROLE_USER') %}
+    {% if productUser.status == 10 %}
+<ul class="breadcrumb">
+  <li class="h-product-title"style="font-weight: normal;" >Authentification  </li>
+  <li class="h-product-title" style="font-weight: normal;"> Achat du produit</li>
+  <li class="h-product-title" style="font-weight: bold;">Confirmation</li>
+</ul>
+
+  <h3>Confirmation de l'achat</h3>
+  <h5>Félicitations !! Vous avez acheter le produit. </h5>
+  <h5>Il ne vous reste plus qu'à le détacher sur un Smart Détacher </h5>
+
+  
+    {% else %}
+<ul class="breadcrumb">
+  <li class="h-product-title"style="font-weight: normal;">Authentification</li>
+  <li class="h-product-title" style="font-weight: bold;">Achat du produit</li>
+  <li class="h-product-title"style="font-weight: normal;">Confirmation</li>
+</ul>
+
+<a href="{{ path('ts_app_product_paid', {'id': product.id}) }}" class="btn btn-primary">Payer</a>
+    {% endif %}
+    
+    {% else %}
+<ul class="breadcrumb">
+  <li  class="h-product-title" style="font-weight: bold;">Authentification</li>
+  <li class="h-product-title" style="font-weight: normal;">Achat du produit</li>
+  <li class="h-product-title" style="font-weight: normal;">Confirmation</li>
+</ul>   
+
+    {{ render(controller('FOSUserBundle:Security:login')) }}
+{% endif %}
+
+      
+
+
+{% endblock %}

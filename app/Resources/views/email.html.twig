@@ -1,0 +1,44 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block stylesheets %}
+ {% stylesheets
+  'css/bootstrap.css'
+    'css/main2.css'
+    filter='cssrewrite'
+ %}
+  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+  {% endblock %}
+</head>
+
+<body>
+
+    
+        {% block body %}
+            
+            
+            
+        {% endblock %}
+
+
+    <footer>
+      <p>Produced by Thibault © {{ 'now'|date('Y') }} </p>
+    </footer>
+
+    
+
+  {% javascripts
+   'js/bootstrap.min.js'
+  'js/main.js'  %}
+  {#   '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' #}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+    <input type="hidden" id="refreshed" value="no">
+  {% endjavascripts %}
+
+</body>
+</html>

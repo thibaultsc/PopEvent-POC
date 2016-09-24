@@ -1,0 +1,6 @@
+ts_user_register:
+    path: /register
+    defaults: { _controller: TSUserBundle:Registration:register }
+ts_user_login:
+    path: /login
+    defaults: { _controller: TSUserBundle:Security:login }

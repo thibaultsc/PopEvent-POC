@@ -1,0 +1,203 @@
+@import "fonts";
+
+$purple: #642882;
+$purple-dark: #3f2e44;
+$gray-light: #f3f3f3;
+$gray-medium: #d9d9d9;
+
+$font-family-light: "OpenSansLight", Helvetica, Arial, sans-serif;
+$font-family-regular: "OpenSansRegular", Helvetica, Arial, sans-serif;
+$font-family-bold: "OpenSansBold", Helvetica, Arial, sans-serif;
+$font-family-oswald: "Oswald", Helvetica, Arial, sans-serif;
+
+$header-height: 8%;
+$product-top-height: 31%;
+$product-bottom-height: 15%;
+$app-list-height: 46%;
+$app-height: 100%/3;
+
+
+a {
+    outline: none !important;
+    border: none;
+    color: $purple-dark;
+
+    &:hover, &:focus {
+        text-decoration: none;
+        color: $purple-dark;
+    }
+}
+
+//  Global style
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    color: $purple-dark;
+    font-family: $font-family-light;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.table {
+    display: table;
+    height: 100%;
+    width: 100%;
+
+    .table-cell {
+        width: 100%;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+//  Header
+header {
+    height: $header-height;
+    min-height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: $gray-light;
+    border-bottom: 1px solid $gray-medium;
+
+    .logo {
+        height: 100%;
+        width: 100%;
+        background: url("/bundles/cooptilleulsmondaron/images/exaqtworld-fashion-store.png") no-repeat center center;
+        background-size: contain;
+    }
+}
+
+//  Product info
+.product-top {
+    height: $product-top-height;
+    min-height: 115px;
+
+    .image {
+        height: 100%;
+        padding-right: 0;
+        padding-left: 0;
+
+        & > div {
+            height: 100%;
+            width: 100%;
+
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+        }
+    }
+
+    .name {
+        height: 100%;
+        font-size: 1.3em;
+        text-align: center;
+        border-left: 1px solid $gray-medium;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.product-bottom {
+    height: $product-bottom-height;
+    min-height: 65px;
+    background-color: $gray-light;
+    border-top: 1px solid $gray-medium;
+    border-bottom: 1px solid $gray-medium;
+
+    & > div {
+        height: 50%;
+    }
+
+    .size, .color {
+        p {
+            display: inline-block;
+            font-size: 1.3em;
+            margin: 0;
+        }
+    }
+
+    .size {
+        text-align: right;
+    }
+
+    .color {
+        text-align: left;
+
+        span {
+            margin-left: 10px;
+            width:25px;
+            height:25px;
+            display:inline-block;
+            vertical-align: bottom;
+        }
+    }
+
+    .price {
+        text-align: center;
+        font-family: $font-family-regular;
+        font-size: 1.7em;
+    }
+}
+
+//  App list
+.app-list {
+    height: $app-list-height;
+    min-height: 250px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .row {
+        height: $app-height;
+
+        .app {
+            text-align: center;
+            padding-left: 5px;
+            padding-right: 5px;
+
+            .icon-container {
+                display: block;
+                margin: auto;
+                background-color: $purple;
+                padding: 7px;
+
+                width: 44px;
+                height: 44px;
+
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                -ms-border-radius: 8px;
+                -o-border-radius: 8px;
+                border-radius: 8px;
+
+                span {
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                    background: url("/bundles/cooptilleulsmondaron/images/app-icons.png") no-repeat;
+
+                    &.care{ background-position: 0 0;  }
+                    &.cmondaronkipaie{ background-position: 0 -60px;  }
+                    &.fitizzy{ background-position: 0 -120px;  }
+                    &.like{ background-position: 0 -180px;  }
+                    &.other{ background-position: 0 -240px;  }
+                    &.pay{ background-position: 0 -300px;  }
+                    &.product{ background-position: 0 -360px;  }
+
+                }
+            }
+
+            p {
+                margin-top: 5px;
+                margin-bottom: 0;
+                line-height: 1;
+                font-family: $font-family-oswald;
+            }
+        }
+    }
+}

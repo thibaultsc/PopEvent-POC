@@ -1,0 +1,66 @@
+{# app/Resources/views/layout.html.twig #}
+{% if association is defined %} {% set href %}  {% endset %}{% else %}{% set href %}href="{{ path('ts_app_product_view', {'id': product.id}) }}" {% endset %}{% endif %}
+
+
+
+<div class=" btn col-lg-3 col-md-4 hidden-xs hidden-sm">
+            <a {{ href }}>
+    <div class="well col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:3px;margin-top:3px;">
+
+            <div class="col-xs-4 col-md-12 product-card"  style="background-image:url({{ asset('/bundles/tsapp/images/'~product.image.id~'.'~product.image.url) }});margin-bottom:0px;margin-left:0px;"></div>
+            <div class="col-xs-6 col-md-12">
+                <div style="color:#000000;" >
+                    <div class="h-product-title" style="margin-top:0.5vw;height:50px;">{{product.title}}</div>
+                    <div class="h-product-brand">{{product.brand.name}}, {{product.size.name}}</div>
+                    <div class="h-product-category">{{product.category.name}} </div>
+                </div>
+            </div>
+
+        <div class="col-xs-2 col-md-12">
+
+                <div class="h-product-price"style="color:#000000;">
+                    {{product.price|number_format(2, ',', ' ')}} € 
+                </div>
+                <div class="h-product-title" style="margin-top:0.5vw;height:30px;"></div>
+
+        </div>        
+    </div>
+                </a>
+            <div class="" style="bottom:30px;width:90%;position:absolute;">
+             {% set prefix = 'b' %}
+             {{ include('TSAppBundle:Product:buttons.html.twig') }}     
+            </div>
+</div>
+
+            
+            <div style="width:100%; position:relative;"><a {{ href }}>
+<div class="row well visible-xs visible-sm pc-padding-sm">
+
+        <div class="col-xs-3 col-md-12 product-card"  style="background-image:url({{ asset('/bundles/tsapp/images/'~product.image.id~'.'~product.image.url) }});margin-bottom:0px;margin-left:0px;"></div>
+        <div class="col-xs-6 col-md-12">
+          <div style="color:#000000;" >
+            <div class="h-product-title" style="margin-top:0.5vw;">{{product.title}}</div>
+            <div class="h-product-brand">{{product.brand.name}}, {{product.size.name}}</div>
+            <div class="h-product-category">{{product.category.name}} </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3 col-md-12">
+
+            <div class="h-product-price" >
+                {{product.price|number_format(2, ',', ' ')}} €
+            </div>
+
+
+            
+        </div>
+    
+</div>
+</a>
+            <div class="visible-xs visible-sm" style="bottom:30%;left:80%;position:absolute;width:20%;text-align:center;">
+             {% set prefix = 's' %}
+             {{ include('TSAppBundle:Product:buttons.html.twig') }}     
+            </div>
+
+            </div>
+                        

@@ -1,0 +1,38 @@
+
+        <div class="col-lg-4 rm-padding-sm col-md-6">
+          <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover " style="background-image:url({{ asset('/bundles/tsapp/images/'~event.image.id~'.'~event.image.url) }});">
+              
+    <a href="{{ path('ts_app_event_view', {'id': event.id}) }}" class="link-reset">
+    <div class="va-container va-container-v va-container-h">
+      <div class="va-middle text-center text-contrast">
+          <div class="h2">
+            <strong>
+              {{ event.name }}
+            </strong>
+          </div>
+      </div>
+    </div>
+    </a>
+            <div class="panel-overlay-bottom-left panel-overlay-label panel-overlay-listing-label" >
+              <span class="h3">
+                {{ event.dateevent|localizeddate('medium', 'none', 'fr')  }}
+              </span>
+            </div>
+            {%if reservedEvent is defined %}
+                {% if reservedEvent >9 %}
+                    <a class="panel-overlay-bottom-right btn btn-success " href="{{ path('ts_app_event_subscribe', {'id': event.id}) }}">J'ai réservé !</a>
+                {%else%}
+                    <a class="panel-overlay-bottom-right btn btn-default" href="{{ path('ts_app_event_subscribe', {'id': event.id}) }}">Réserver</a>
+                {%endif%}
+            {%else%}
+                <a class="panel-overlay-bottom-right btn btn-default" href="{{ path('ts_app_event_subscribe', {'id': event.id}) }}">Réserver</a>
+            {%endif%}
+</div>
+
+
+    </div>
+
+    
+    
+    
+  

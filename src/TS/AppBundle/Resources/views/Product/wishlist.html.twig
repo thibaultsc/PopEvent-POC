@@ -1,0 +1,29 @@
+
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Home - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+  <h2>Mes produits favoris</h2>
+
+{% if productusers[0] is defined %}   
+
+{% for productuser in productusers %}  
+{% set likeproduct = 1 %}
+{{ include('TSAppBundle:Product:rawlist.html.twig', {'product': productuser.product}) }}
+
+{% endfor %}
+
+ {% else %}
+     
+     <h6>Tu n'as pas encore ajouté de produit à tes favoris </h6>
+
+{% endif %} 
+
+<div class='row'> </div>
+
+    
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Associer un produit - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+
+  Choisi le produit sur lequel est posé l'antivol scanné
+  {% set association = '1' %}
+  {% for product in products %}
+      {{ include('TSAppBundle:Product:rawlist.html.twig', {'product': product}) }}
+  {% endfor %}
+  
+{% endblock %}

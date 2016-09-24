@@ -1,0 +1,53 @@
+
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Home - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+<div class="discovery-section page-container-responsive page-container-no-padding">
+    <div class="section-intro text-center row-space-6 row-space-top-8">
+  <h2 class="row-space-1">
+    <strong>Voici les prochains évènements </strong>
+  </h2>
+  <p class="text-lead">
+    Découvrez de nouveaux événements incroyables près de chez vous.
+  </p>
+</div>
+<div class="discovery-tiles">
+  <div class="homepage-module">
+    <div class="row">
+
+ 
+        
+        
+{% for event in events %} 
+    {% set reservedEvent = '0' %}
+    {% for eventUser in event.eventUsers %} 
+        {% if eventUser.user == app.user  %}
+            {% set reservedEvent = eventUser.status %}
+        {% endif  %}
+    {% endfor %}
+
+    {{ include('TSAppBundle:Event:rawlist.html.twig', {'event': event}) }}
+    
+
+{% endfor %}
+
+  </div>
+              <div class="row row-space-top-4">
+                  <div class='' style='text-align:center'>
+                      {% if is_granted('ROLE_USER') %}
+                       <img src="{{ qrcode_url( 'http://dt2.eu/' ~app.user.qrcode, extension='png') }}" />
+                      {% endif %}
+                  </div> </div>
+</div>
+</div></div>
+    
+    
+    
+    
+    
+{% endblock %}

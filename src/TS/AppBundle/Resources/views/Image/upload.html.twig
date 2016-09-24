@@ -1,0 +1,18 @@
+
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Home - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+<h1>Upload File</h1>
+
+<form action="#" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <input type="submit" value="Upload Document" />
+</form>
+    
+    
+{% endblock %}

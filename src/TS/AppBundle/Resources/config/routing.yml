@@ -1,0 +1,140 @@
+# Routes Home
+ts_app_home:
+    path:     /home
+    defaults: { _controller: TSAppBundle:Home:index }
+ts_app_help:
+    path:     /help
+    defaults: { _controller: TSAppBundle:Home:help }
+
+#Routes Event
+ts_app_event_add:
+    path:     /event_add
+    defaults: { _controller: TSAppBundle:Event:add }
+ts_app_event_view:
+    path:     /event_view/{id}
+    defaults: { _controller: TSAppBundle:Event:view }
+ts_app_event_edit:
+    path:     /event_edit/{id}
+    defaults: { _controller: TSAppBundle:Event:edit }
+ts_app_event_delete:
+    path:     /event_delete/{id}
+    defaults: { _controller: TSAppBundle:Event:delete }
+ts_app_event_subscribe:
+    path:     /event_subscribe/{id}
+    defaults: { _controller: TSAppBundle:Event:subscribe }
+ts_app_event_paid:
+    path:     /event_paid/{id}
+    defaults: { _controller: TSAppBundle:Event:paid }
+ts_app_event_list:
+    path: /event_list
+    defaults: { _controller: TSAppBundle:Event:list }
+ts_app_event_listuser:
+    path: /event_list_user
+    defaults: { _controller: TSAppBundle:Event:listuser }
+ts_app_event_product:
+    path: /event_product/{id}
+    defaults: { _controller: TSAppBundle:Event:product }
+ts_app_event_product_add:
+    path: /event_product_add/{id}
+    defaults: { _controller: TSAppBundle:Event:addproduct }
+
+
+#Routes User
+ts_app_user_profile:
+    path: /user/{username}
+    defaults: { _controller: TSAppBundle:User:profile }
+ts_app_user_qr:
+    path:     /{qrCode}
+    defaults: { _controller: TSAppBundle:User:qr }
+    requirements:
+        qrCode: '[a-zA-Z0-9]{10}'
+
+
+#Routes Product
+ts_app_product_view:
+    path: /product_view/{id}
+    defaults: { _controller: TSAppBundle:Product:view }
+ts_app_product_add:
+    path:     /product_add
+    defaults: { _controller: TSAppBundle:Product:add }
+ts_app_product_listuser:
+    path: /product_list_user
+    defaults: { _controller: TSAppBundle:Product:listuser }
+ts_app_product_wishlist:
+    path: /product_wishlist
+    defaults: { _controller: TSAppBundle:Product:wishlist }
+ts_app_product_associate:
+    path:     /product_associate/{qrCode}/{id}
+    defaults: { _controller: TSAppBundle:Product:associate }
+    requirements:
+        qrCode: '[a-zA-Z0-9]{12}'   
+ts_app_product_qr:
+    path:     /{qrCode}
+    defaults: { _controller: TSAppBundle:Product:qr }
+    requirements:
+        qrCode: '[a-zA-Z0-9]{12}'
+ts_app_product_edit:
+    path:     /product_edit/{id}
+    defaults: { _controller: TSAppBundle:Product:edit }
+ts_app_product_delete:
+    path:     /product_delete/{id}
+    defaults: { _controller: TSAppBundle:Product:delete }
+ts_app_product_confirm:
+    path:     /product_confirm/{id}
+    defaults: { _controller: TSAppBundle:Product:confirm }
+ts_app_product_validate:
+    path:     /product_validate
+    defaults: { _controller: TSAppBundle:Product:validate }
+ts_app_product_validate_ok:
+    path:     /product_validate_ok/{id}
+    defaults: { _controller: TSAppBundle:Product:validateok }
+ts_app_product_validate_nok:
+    path:     /product_validate_nok/{id}
+    defaults: { _controller: TSAppBundle:Product:validatenok }
+ts_app_product_available:
+    path:     /product_available/{id}
+    defaults: { _controller: TSAppBundle:Product:available }
+ts_app_product_like:
+    path:     /product_like/{id}
+    defaults: { _controller: TSAppBundle:Product:like }
+ts_app_product_unlike:
+    path:     /product_unlike/{id}
+    defaults: { _controller: TSAppBundle:Product:unlike }
+ts_app_product_purchase:
+    path:     /product_purchase/{id}
+    defaults: { _controller: TSAppBundle:Product:purchase }
+ts_app_product_paid:
+    path:     /product_paid/{id}
+    defaults: { _controller: TSAppBundle:Product:paid }   
+    
+#Email
+ts_app_email_user_created:
+    path:     /email_user_created/{id}
+    defaults: { _controller: TSAppBundle:Email:userCreated}
+ts_app_email_product_sold:
+    path:     /email_product_sold/{id}
+    defaults: { _controller: TSAppBundle:Email:productSold}
+ts_app_email_product_purchased:
+    path:     /email_product_purchased/{id}
+    defaults: { _controller: TSAppBundle:Email:productPurchased}
+ts_app_email_event_subscribed:
+    path:     /email_event_subscribed/{id}
+    defaults: { _controller: TSAppBundle:Email:eventSubscribed}
+ts_app_email_product_created:
+    path:     /email_product_created/{id}
+    defaults: { _controller: TSAppBundle:Email:productCreated}
+
+# Routes test
+ts_app_image:
+    path: /image_upload
+    defaults: { _controller: TSAppBundle:Image:upload }
+ts_app_document:
+    path: /document
+    defaults: { _controller: TSAppBundle:Document:upload }
+ts_app_email:
+    path:     /email
+    defaults: { _controller: TSAppBundle:Email:index }
+ts_app_importimage:
+    path:     /upload
+    defaults: { _controller: TSAppBundle:Ask:index }
+

@@ -1,0 +1,35 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  User - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+  <h2>{{ user.username }}</h2>
+  {% if  app.user.username  ==  user.username  %}
+  <i>moi : {{ user.username }}, email : {{ user.email }}</i>
+
+  <div class="well">
+      <h5> Voici votre QR Code qui fera office de ticket pour les évènements où vous êtes inscrit</h5>
+      <h6> (il est possible qu'il mette plusieurs secondes à charger) </h6>
+      <h6> {{user.qrcode}} </h6>
+    <img src="{{ qrcode_url( 'http://dt2.eu/' ~user.qrcode, extension='png') }}" />
+
+  </div>
+{% else %}
+
+<div class="well">
+      <h5>Bientôt vous pourrez intéragir avec les autres utilisateurs</h5>
+        <h6>et consulter leurs notes </h6>
+  </div>
+  
+  {% endif %}
+  <p>
+    <a href="{{ path('ts_app_home') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la liste
+    </a>
+  </p>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+<ul class="nav nav-pills nav-stacked">
+  {% for event in events %}
+    <li>
+      <a href="{{ path('ts_app_event_view', {'id': event.id}) }}">
+        {{ event.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>

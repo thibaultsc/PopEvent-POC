@@ -1,0 +1,61 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'un produit - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+<div>
+    <h2>{{ product.title }} </h2>
+</div>
+    
+    <div class=" col-lg-12 col-md-12">
+        
+        <div class="product-card2 col-xs-12 col-md-12 "  style="background-image:url({{ asset('/bundles/tsapp/images/'~product.image.id~'.'~product.image.url) }});"></div>
+        <div class="col-xs-12 col-md-12">
+            <a >
+                  <div class="h-product-price" style>
+                      <h2>{{product.price|number_format(2, ',', ' ')}} €</h2> <br>
+                  </div>
+                  
+            </a>
+        </div>
+        
+    </div>
+  <div>
+
+ {{ include('TSAppBundle:Product:buttons.html.twig') }}     
+      
+ <h3>Statut du produit :</h3>
+  <i>{{ product.statusProduct.name }}</i>
+</div>
+ <h3>Catégorie :</h3>
+  <i>{{ product.category.name }}</i>
+</div>
+   <div>  
+  <h3>Marque et taille :</h3>
+  <i>{{ product.brand.name }}</i> <br>
+  <i>{{ product.size.name }}</i>
+</div>
+<div>  
+  <h3>Qualité :</h3>
+  <i>{{ product.quality.name }}</i> <br>
+</div>
+   <div>  
+  <h3>Description du vendeur :</h3>
+  <i>{{ product.description }}</i>
+</div>
+   <div>  
+  <h3>Vendu par</h3>
+  <i>{{ product.salesman.username }}</i>
+</div>
+
+ <h3></h3>
+    
+{% if product.salesman == app.user %} 
+
+
+{% endif %}          
+
+{% endblock %}

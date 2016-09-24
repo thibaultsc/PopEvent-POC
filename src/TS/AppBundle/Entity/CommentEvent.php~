@@ -1,0 +1,77 @@
+<?php
+
+namespace TS\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CommentEvent
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class CommentEvent
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TS\AppBundle\Entity\Event")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $event;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TS\AppBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="mark", type="integer", length=255, nullable=true)
+     */
+    private $mark;
+    
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="likes", type="integer", length=255, nullable=true)
+     */
+    private $likes;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", length=255, nullable=true)
+     */
+    private $comment;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enabled", type="boolean")
+     */
+    private $enabled = true;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+  
+}

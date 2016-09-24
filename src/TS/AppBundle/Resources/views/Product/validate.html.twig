@@ -1,0 +1,33 @@
+
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Home - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+  <h2>Liste des produits à valider</h2>
+
+{% if products[0] is defined %}   
+    {% set b=0 %}
+    {% set validation = 1 %}
+{% for product in products %}  
+        {% if product.statusproduct.id == statusproduct.id %}  
+        {% if b== 0 %}  <div class="row" ><h3> {{product.statusproduct.name}} </h3> {% endif %} 
+        {{ include('TSAppBundle:Product:rawlist.html.twig', {'product': product}) }}
+        {% set b=1 %}
+    {% endif %} 
+{% endfor %}
+{% if b== 1 %}  </div> {% endif %} 
+
+ {% else %}
+     
+     <h6>Il n'y a plus de produit à valider</h6>
+
+{% endif %} 
+
+    
+
+    
+{% endblock %}

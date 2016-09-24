@@ -1,0 +1,55 @@
+
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Home - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+  <h2>Mes évènements</h2>
+
+    
+{% if eventUsers[0] is defined %}  
+    <div class="row carousel-item">
+{% for eventuser in eventUsers %} 
+
+    {{ include('TSAppBundle:Event:rawlist.html.twig', {'event': eventuser.event}) }}
+    
+{% endfor %}
+  </div>
+ {% else %}
+     
+     <h6>Tu ne t'ai toujours pas inscrit à l'un des prochains évènements ?
+     Qu'attends-tu ?</h6>
+
+{% endif %}
+<div class='row'>
+    <div style="text-align:center;">
+        <a href="{{ path('ts_app_event_list') }}" class="btn btn-primary">Voir la liste des évènements</a>
+    </div>
+</div>
+    
+    
+    
+
+
+
+ 
+ 
+
+
+
+      
+
+      
+
+    
+
+    
+    
+    
+    
+    
+    
+{% endblock %}

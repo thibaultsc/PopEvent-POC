@@ -1,0 +1,80 @@
+<?php
+
+namespace TS\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use TS\AppBundle\Entity\Event;
+use TS\AppBundle\Entity\Address;
+
+/**
+ * AddressEvent
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class AddressEvent
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TS\AppBundle\Entity\Address")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TS\AppBundle\Entity\Event")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $event;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="information", type="text", nullable=true)
+     */
+    private $information;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+
+    /**
+     * Set information
+     *
+     * @param string $information
+     * @return AddressEvent
+     */
+    public function setInformation($information)
+    {
+        $this->information = $information;
+
+        return $this;
+    }
+
+    /**
+     * Get information
+     *
+     * @return string 
+     */
+    public function getInformation()
+    {
+        return $this->information;
+    }
+}

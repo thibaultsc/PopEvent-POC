@@ -1,0 +1,89 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'un évènement - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+  {% if event.image.url is defined %}
+    <div  class="row top-image" style="background-image:url({{ asset('/bundles/tsapp/images/'~event.image.id~'.'~event.image.url) }}); margin-top:-45px;">
+        <div class="event-title">
+            <h1 class="strong event-title-content">{{ event.name }}</h1>
+            
+        </div>
+    </div>
+  {% endif %}
+
+<div class="row well margin-top-20">
+  <div class="col-lg-3  col-md-3 col-xs-6">
+      {% set datte = (event.dateevent|localizeddate('medium', 'none', 'fr'))|split(' ', 2) %} 
+      <h3 class="text-center" >{{ datte[0] }}</h3>
+      <h6 class="text-center" >{{ datte[1] }}</h6>
+  </div>
+  <div class="col-lg-4  col-md-4  col-xs-6">
+      {% if eventUser.status == 10 %}
+      <h3 class="text-center" >Inscription</h3>
+      <h6 class="text-center" >confirmée</h6> 
+      {% else %}
+      <h3 class="text-center" >{{event.priceplace|number_format(2, ',', ' ')}} €</h3>
+      <h6 class="text-center" >la place</h6>
+      {% endif %}
+
+  </div>
+  <div class="col-lg-4  col-md-4  col-xs-12">
+{% if eventUser.status == 10 %}
+        <a href="{{ path('ts_app_product_add', {'id': event.id}) }}" class="btn btn-primary center-block h3">Vendre des produits</a>
+{% else %}
+    <a href="{{ path('ts_app_event_subscribe', {'id': event.id}) }}" class="btn btn-primary center-block h3">Participer</a>
+{% endif %}
+  </div>
+</div>  
+          
+<div class="text-lead text-left " style="color: #000000; margin-left: 0px;">
+    <h2>La liste des produits à vendre</h2>
+</div>
+  
+
+
+{% set likeproduct = 0 %}
+{% for productfull in productfulls %}  
+    {% for productUser in productfull.productUsers %} 
+        {% if productUser.user == app.user  %}
+            {% set likeproduct = productUser.likes %}
+        {% endif  %}
+    {% endfor %}
+ 
+    {{ include('TSAppBundle:Product:rawlist.html.twig', {'product': productfull} ) }}
+    {% set likeproduct = 0 %}
+
+{% endfor %}
+
+
+<div class='row'>
+<div class="container col-lg-12" style="text-align:center">
+  {%if nbPages > 1 %}
+    <ul class="pagination">
+  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+  {% for p in range(1, nbPages) %}
+    <li{% if p == page %} class="active"{% endif %}>
+      <a href="{{ path('ts_app_event_product', {'id': event.id, 'page': p}) }}">{{ p }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{%else%}
+    <div class="alert alert-dismissible alert-info">Il n'y a pas encore de produits à vendre</div>
+ {%endif%}
+
+
+</div>
+<div class="container col-lg-12" style="text-align:center">
+  <a href="{{ path('ts_app_event_view', {'id': event.id}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Retour à la page de l'évènement
+  </a>
+
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Home - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+  <h2>Prochains évènements ouverts</h2>
+
+
+
+    <div class="row carousel-item">
+
+        {% for event in events %}
+             {{ include('TSAppBundle:Event:rawlist.html.twig', {'event': event}) }}
+        
+        {% endfor %}
+  </div>
+    
+    
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Cmondaronkipaie{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets 'css/bootstrap.min.css' filter='cssrewrite' %}
+
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {% stylesheets '//cmondaronkipaie.com/css/main.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="content">
+
+            {% block header %}
+                <header class="block">
+                    <div class="table">
+                        <h1 class="table-cell">Cmondaronkipaie</h1>
+                    </div>
+                </header>
+            {% endblock %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+    '@TSAppBundle/Resources/public/bower_components/jquery/dist/jquery.min.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

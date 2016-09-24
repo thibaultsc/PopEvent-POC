@@ -1,0 +1,48 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'un évènement - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+    <div class="margin-bottom-50"></div>
+{% if is_granted('ROLE_USER') %}
+    {% if eventUser.status == 10 %}
+<ul class="breadcrumb">
+  <li class="h-product-title"style="font-weight: normal;" >Authentification  </li>
+  <li class="h-product-title" style="font-weight: normal;"> Achat</li>
+  <li class="h-product-title" style="font-weight: bold;">Confirmation</li>
+</ul>
+
+  <h3>Confirmation de l'achat</h3>
+  <h5>Félicitations !! Vous êtes bien inscrit. </h5>
+  <h5>Pour vous identifier le jour de l'évènements, présentez simplement le QR code dans votre profil </h5>
+
+  <a href="{{ path('ts_app_event_product', {'id': event.id, 'page': 1}) }}" class="btn btn-primary">Voir les produits</a>
+  <a href="{{ path('ts_app_product_add', {'id': event.id}) }}" class="btn btn-primary">Vendre des produits</a>
+  
+    {% else %}
+<ul class="breadcrumb">
+  <li class="h-product-title"style="font-weight: normal;">Authentification</li>
+  <li class="h-product-title" style="font-weight: bold;">Achat</li>
+  <li class="h-product-title"style="font-weight: normal;">Confirmation</li>
+</ul>
+
+<a href="{{ path('ts_app_event_paid', {'id': event.id}) }}" class="btn btn-primary">Payer</a>
+    {% endif %}
+    
+    {% else %}
+<ul class="breadcrumb">
+  <li  class="h-product-title" style="font-weight: bold;">Authentification</li>
+  <li class="h-product-title" style="font-weight: normal;">Achat</li>
+  <li class="h-product-title" style="font-weight: normal;">Confirmation</li>
+</ul>   
+
+    {{ render(controller('FOSUserBundle:Security:login')) }}
+{% endif %}
+
+      
+
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% if prefix is defined %}
+    {% set buttonsize = "btn-xs" %}
+{% else %}
+    {% set buttonsize = "" %}
+    {% set prefix = "" %}
+{% endif %}
+
+{% if likeproduct is not defined %}  
+    {% if productuser is defined %}  
+        {% set likeproduct = productuser.likes %}
+    {% endif %}
+{% endif %}
+
+{% set status = product.statusProduct.name %}
+
+<div style="text-align: center;">
+{% if status == "En cours de validation" %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div id="v{{prefix}}{{product.id}}"  data-href="{{ path('ts_app_product_validate_ok', {'id': product.id}) }}" class="btn btn-default {{buttonsize}}" data-class="btn {{buttonsize}}" onclick="validate({{product.id}});"><i class="glyphicon glyphicon-ok"></i> Valider</div>
+        <div id="u{{prefix}}{{product.id}}"  data-href="{{ path('ts_app_product_validate_nok', {'id': product.id}) }}" class="btn btn-default {{buttonsize}}" data-class="btn {{buttonsize}}" onclick="unvalidate({{product.id}});"><i class="glyphicon glyphicon-remove"></i> Refuser</div>
+    {%endif%}
+{% else %}
+{% if prefix == 'b' %}
+    <a  class="btn btn-primary btn-xs hidden-xs hidden-sm" {{ href }}>Voir Produit</a>
+{% endif %}
+{% if product.salesman == app.user %}
+    {% if status == "En cours de création" %}
+        <div id="c{{prefix}}{{product.id}}" data-confirm="0" data-href="{{ path('ts_app_product_confirm', {'id': product.id}) }}" class="btn btn-default {{buttonsize}}" data-class="btn {{buttonsize}}" onclick="confirm({{product.id}});">Soumettre à validation</div>
+    {%endif%}
+    {% if status == "Disponible à la vente" %}
+        {% if buttonsize == "" %}
+            <div id="r{{prefix}}{{product.id}}" data-confirm="0" data-href="{{ path('ts_app_product_confirm', {'id': product.id}) }}" class="btn btn-default {{buttonsize}}" data-class="btn {{buttonsize}}" onclick="takeoff({{product.id}});">Retirer de la vente</div>
+        {%endif%}
+        {% if association is defined %}
+            <div id="ch{{prefix}}{{product.id}}" data-choose="0" data-href="{{ path('ts_app_product_associate', {'id': product.id, 'qrCode': qrCode}) }}" class="btn btn-default btn-xs" onclick="choose({{product.id}});">Choisir</div>
+        {%endif%}
+    {%endif%}
+    {% if status == "Indisponible à la vente" %}
+        {% if buttonsize == "" %}
+            <div id="a{{prefix}}{{product.id}}" data-available="1" data-href="{{ path('ts_app_product_available', {'id': product.id}) }}" class="btn btn-default {{buttonsize}}" data-class="btn {{buttonsize}}" onclick="takeoff({{product.id}});">Mettre en vente</div>
+        {%endif%}
+    {%endif%}
+    {% if status == "Disponible à la vente et associé avec un antivol" %}
+        {% if buttonsize == "" %}
+            <div id="r{{prefix}}{{product.id}}" data-confirm="0" data-href="{{ path('ts_app_product_confirm', {'id': product.id}) }}" class="btn btn-default {{buttonsize}}" data-class="btn {{buttonsize}}" onclick="takeoff({{product.id}});">Retirer de la vente</div>
+        {%endif%}
+    {%endif%}
+    {% if status == "Vendu" %}
+    {%endif%}
+    {% if status == "Vendu et détachable" %}
+    {%endif%}
+    {% if status == "Vendu et détaché" %}
+    {%endif%}
+    {% if status == "Refusé à la vente" %}
+    {%endif%}
+    {% if status == "Disponible à la vente par correspondance post-event" %}
+    {%endif%}
+    {% if status == "Disparu durant l’évènement" %}
+    {%endif%}
+    {% if buttonsize == "" %}
+        <a href="{{ path('ts_app_product_edit', {'id': product.id}) }}" class="btn btn-default">
+          <i class="glyphicon glyphicon-edit"></i>
+          Modifier le produit
+        </a>
+        <a href="{{ path('ts_app_product_delete', {'id': product.id}) }}" class="btn btn-danger">
+          <i class="glyphicon glyphicon-trash"></i>
+          Supprimer le produit
+        </a>
+    {%endif%}
+{%else%}
+    {% if status == "En cours de création" %}
+    {%endif%}
+    {% if status == "En cours de validation" %}
+    {%endif%}
+    {% if status == "Disponible à la vente" %}
+    {%endif%}
+    {% if status == "Indisponible à la vente" %}
+    {%endif%}
+    {% if status == "Disponible à la vente et associé avec un antivol" %}
+        {% if scan is defined %}  
+            {% if scan == 1 %}  
+                <a  href="{{ path('ts_app_product_purchase', {'id': product.id}) }}"class="btn btn-primary" data-class="btn {{buttonsize}}">
+                    Acheter
+                </a>
+            {%endif%}
+        {%endif%}
+    {%endif%}
+    {% if status == "Vendu" %}
+    {%endif%}
+    {% if status == "Vendu et détachable" %}
+    {%endif%}
+    {% if status == "Vendu et détaché" %}
+    {%endif%}
+    {% if status == "Refusé à la vente" %}
+    {%endif%}
+    {% if status == "Disponible à la vente par correspondance post-event" %}
+                <a  href="{{ path('ts_app_product_purchase', {'id': product.id}) }}"class="btn btn-primary" data-class="btn {{buttonsize}}">
+                    Acheter
+                </a>
+    {%endif%}
+    {% if status == "Disparu durant l’évènement" %}
+    {%endif%}
+    {% if likeproduct is defined %}  
+        {% if likeproduct == 1 %} 
+            <div  id="f{{prefix}}{{product.id}}" class="btn btn-danger {{buttonsize}}" data-class="btn {{buttonsize}}" data-like="{{likeproduct}}" data-href="{{ path('ts_app_product_like', {'id': product.id}) }}" onclick="like({{product.id}});">
+                <i class="glyphicon glyphicon-heart"></i> Favoris
+            </div>
+        {% else %}
+            <div  id="f{{prefix}}{{product.id}}" class="btn btn-default {{buttonsize}}" data-class="btn {{buttonsize}}" data-like="{{likeproduct}}" data-href="{{ path('ts_app_product_like', {'id': product.id}) }}" onclick="like({{product.id}});">
+                <i class="glyphicon glyphicon-heart-empty"></i> Ajouter
+            </div>
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% endif %}
+</div>
+ 

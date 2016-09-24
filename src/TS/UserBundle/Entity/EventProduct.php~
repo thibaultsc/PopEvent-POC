@@ -1,0 +1,49 @@
+<?php
+
+namespace TS\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EventProduct
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class EventProduct
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TS\AppBundle\Entity\Event")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $event;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TS\AppBundle\Entity\Product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+  
+}

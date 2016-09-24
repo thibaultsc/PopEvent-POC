@@ -1,0 +1,100 @@
+{% extends "TSAppBundle::layout2.html.twig" %}
+{% form_theme form 'TSAppBundle:Form:fields.html.twig' %}
+
+{% block title %}{{ parent() }} | Home{% endblock %}
+
+{% block content %}
+    <div class="block pink ask-description">
+        <div class="table">
+            <div class="table-cell">
+                Fais toi payer ta fringue en 4 étapes, c’est simple et rapide !
+            </div>
+        </div>
+    </div>
+    <div class="block white ask-description">
+        <div class="table">
+            <div class="table-cell">
+                {{ product.title }}
+            </div>
+        </div>
+    </div>
+
+    <div class="ask-form-container">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+
+        <div class="input-file">
+            <span class="step">1</span>
+            <span class="optional">(facultatif)</span>
+            {{ form_errors(form.photoFile) }}
+            {{ form_widget(form.photoFile) }}
+        </div>
+
+
+       
+
+        {{ form_rest(form) }}
+
+        {{ form_end(form) }}
+         <button type="submit" class="block small btn"><span class="step">4</span>Fais toi payer ta fringue !</button>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/cooptilleulsmondaron/bower_components/blueimp-canvas-to-blob/js/canvas-to-blob.min.js') }}"></script>
+    <script src="{{ asset('bundles/cooptilleulsmondaron/js/binaryajax.js') }}"></script>
+    <script src="{{ asset('bundles/cooptilleulsmondaron/js/canvasResize.js') }}"></script>
+    <script src="{{ asset('bundles/cooptilleulsmondaron/js/exif.js') }}"></script>
+    <script>
+        $(function () {
+            // Resize and correct orientation of the submitted file client-side
+            var correctedFile;
+
+            $("#image").change(function(e) {
+                var file = e.target.files[0];
+
+                canvasResize(file, {
+                    width: 768,
+                    quality: 100,
+                    callback: function(canvas) {
+                        $("#custom").attr("style", "background-image: url(" + canvas.toDataURL('image/jpeg') + ");").addClass("active");
+
+                        canvas.toBlob(function(blob) {
+                             correctedFile = blob;
+                        });
+                    }
+                });
+            });
+
+            var form = $("form[name='cooptilleuls_mondaronbundle_purchase']");
+            $("form").submit(function (e) {
+                e.preventDefault();
+
+                var formData = new FormData();
+                for (var i = 0; i < form[0].length; i++) {
+                    if (form[0][i].name == 'cooptilleuls_mondaronbundle_purchase[photoFile]') {
+                        formData.append(form[0][i].name, correctedFile, "image.jpg");
+                    } else {
+                        formData.append(form[0][i].name, form[0][i].value);
+                    }
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function (aEvt) {
+                    if (xhr.readyState == 4) {
+                        if(xhr.status == 200) {
+                            window.location = JSON.parse(xhr.responseText);
+                        } else {
+                            alert("Erreur pendant le chargement de la page.");
+                        }
+                    }
+                };
+                xhr.open("POST", form.attr("action"));
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.send(formData);
+            });
+        });
+    </script>
+{% endblock %}

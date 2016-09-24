@@ -1,0 +1,159 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'un évènement - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+
+
+  {% if event.image.url is defined %}
+    <div  class="row top-image" style="background-image: url({{ asset('/bundles/tsapp/images/'~event.image.id~'.'~event.image.url) }});">
+        <div class="event-title">
+            <h1 class="strong event-title-content">{{ event.name }}</h1>
+        </div>
+    </div>
+  {% endif %}
+
+<div class="row hidden-md hidden-lg">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:center;">
+{% if eventUser.status is defined  %}
+{% if eventUser.status == 10 %}
+        <a href="{{ path('ts_app_product_add', {'id': event.id}) }}" class="btn btn-primary h3">Vendre des produits</a>
+{% else %}
+    <a href="{{ path('ts_app_event_subscribe', {'id': event.id}) }}" class="btn btn-primary h3">Réserver ma place</a>
+{% endif %}
+{% else %}
+    <a href="{{ path('ts_app_event_subscribe', {'id': event.id}) }}" class="btn btn-primary h3">Réserver ma place</a>
+{% endif %}
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:center;">
+<a href="https://www.google.at/maps/place/Grand+Palais,+3+Avenue+du+G%C3%A9n%C3%A9ral+Eisenhower,+75008+Paris,+France/@48.8661091,2.3124544,17z/data=!4m2!3m1!1s0x47e66fd048eedcd1:0x499b45575147a06b" class="btn btn-primary h3">Voir sur la carte</a>
+   </div>
+</div>
+
+    
+<div class="row well margin-top-20">
+  <div class="col-lg-3  col-md-3 col-xs-6">
+      {% set datte = (event.dateevent|localizeddate('medium', 'none', 'fr'))|split(' ', 2) %} 
+      <h2 class="text-center" >{{ datte[0] }}</h2>
+      <h5 class="text-center" >{{ datte[1] }}</h5>
+  </div>
+  <div class="col-lg-3  col-md-3 col-xs-6">
+      <h2 class="text-center" >{{ counterdays }}</h2>
+      <h5 class="text-center" >jours restants</h5>
+  </div>
+  <div class="col-lg-3  col-md-3 col-xs-6">
+      {% if eventUser.status is defined  %}
+      {% if eventUser.status == 10 %}
+      <h2 class="text-center" >Inscription</h2>
+      <h5 class="text-center" >confirmée</h5> 
+      {% else %}
+       <h2 class="text-center" >{{ counterusers }}</h2>
+      <h5 class="text-center" >places restantes</h5>
+      {% endif %}
+      {% else %}
+      <h2 class="text-center" >50</h2>
+      <h5 class="text-center" >places restantes</h5>
+      {% endif %}
+
+  </div>
+  <div class="col-lg-3  col-md-3  col-xs-6">
+      <h2 class="text-center" >{{event.priceplace|number_format(2, ',', ' ')}} €</h2>
+      <h5 class="text-center" >la place</h5>
+  </div>
+</div>  
+          
+
+ <div class="row hidden-lg hidden-md" style="margin-bottom:20px;">
+
+            <div class="row-space-2 col-xs-12 col-sm-12">
+                <h4>En deux mots</h4>
+                <p class="text-lead">
+                    {{ event.description }} </br>
+                    L'évènement sera le {{ event.dateevent|date('d/m/Y') }}. </br>
+                    Les inscriptions commencent le {{ event.datebegin|date('d/m/Y') }} et finissent le {{ event.dateend|date('d/m/Y') }}.
+                </p>
+            </div>
+
+</div>  
+      
+      
+      
+      <div class="row hidden-sm hidden-xs" style="margin-bottom:50px;">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+{% if eventUser.status is defined  %}
+{% if eventUser.status == 10 %}
+        <a href="{{ path('ts_app_product_add', {'id': event.id}) }}" class="btn btn-primary center-block h3">Vendre des produits</a>
+{% else %}
+    <a href="{{ path('ts_app_event_subscribe', {'id': event.id}) }}" class="btn btn-primary center-block h3">Réserver ma place</a>
+{% endif %}
+{% else %}
+    <a href="{{ path('ts_app_event_subscribe', {'id': event.id}) }}" class="btn btn-primary center-block h3">Réserver ma place</a>
+{% endif %}
+        <div class="discovery-bottom hidden-xs hidden-sm">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Grand+Palais+Paris&zoom=15&size=300x300&maptype=roadmap&
+markers=48.8661091,2.3124544;&key=AIzaSyCOxmdI6pn_G1D2gafQZvnS7sg8t143ifE" data-reactid=".m.0.0.0.0">
+        </div>
+        <a href="https://www.google.at/maps/place/Grand+Palais,+3+Avenue+du+G%C3%A9n%C3%A9ral+Eisenhower,+75008+Paris,+France/@48.8661091,2.3124544,17z/data=!4m2!3m1!1s0x47e66fd048eedcd1:0x499b45575147a06b" class="btn btn-primary center-block h3 hidden-md hidden-lg">Voir sur la carte</a>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
+        <div class="map-container">
+            <div class="row-space-2">
+                <h4>En deux mots</h4>
+                <p class="text-lead">
+                    {{ event.description }} </br>
+                    L'évènement sera le {{ event.dateevent|date('d/m/Y') }}. </br>
+                    Les inscriptions commencent le {{ event.datebegin|date('d/m/Y') }} et finissent le {{ event.dateend|date('d/m/Y') }}.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>  
+          
+         
+<div class="text-lead text-left " style="color: #000000; margin-left: 0px;">
+    <h2>Quelques uns des produits à vendre</h2>
+</div>
+{% set likeproduct = 0 %}
+{% if eventUser.status is defined  %} 
+{% for productfull in productfulls %}  
+    {% for productUser in productfull.productUsers %} 
+        {% if productUser.user == app.user  %}
+            {% set likeproduct = productUser.likes %}
+        {% endif  %}
+    {% endfor %}
+ 
+    {{ include('TSAppBundle:Product:rawlist.html.twig', {'product': productfull} ) }}
+    {% set likeproduct = 0 %}
+
+{% endfor %}
+<div class='row'>
+<div class="container col-lg-12" style="text-align:center">
+  {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('ts_app_event_edit', {'id': event.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier l'évènement
+    </a>
+    <a href="{{ path('ts_app_event_delete', {'id': event.id}) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer l'évènement
+    </a>
+  {% endif %}
+  <a href="{{ path('ts_app_event_product', {'id': event.id, 'page': 1}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-chevron-right"></i>
+    Voir la liste complète des produits
+  </a>
+</div>
+  </div>
+{% else %}
+    <h5>Vous devez être connecté pour voir la liste des produits</h5>
+    <div class='row'>
+    <a class="btn btn-primary" href="{{ path('ts_user_register') }}">Se connecter / Créer son compte</a>
+  </div>
+{% endif %}
+
+
+
+{% endblock %}

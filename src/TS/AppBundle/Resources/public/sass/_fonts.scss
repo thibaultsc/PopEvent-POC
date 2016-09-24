@@ -1,0 +1,23 @@
+$fonts-path: "/bundles/cooptilleulsmondaron/fonts";
+
+@font-face {
+    font-family: 'OpenSansRegular';
+    src: url(#{$fonts-path}/OpenSans.eot?#iefix) format('embedded-opentype'),  url(#{$fonts-path}/OpenSans.woff) format('woff'), url(#{$fonts-path}/OpenSans.ttf)  format('truetype'), url(#{$fonts-path}/OpenSans.svg#OpenSans) format('svg');
+}
+
+@font-face {
+    font-family: 'OpenSansLight';
+    src: url(#{$fonts-path}/OpenSans-Light.eot?#iefix) format('embedded-opentype'),  url(#{$fonts-path}/OpenSans-Light.woff) format('woff'), url(#{$fonts-path}/OpenSans-Light.ttf)  format('truetype'), url(#{$fonts-path}/OpenSans-Light.svg#OpenSans-Light) format('svg');
+}
+
+
+@font-face {
+    font-family: 'OpenSansBold';
+    src: url(#{$fonts-path}/OpenSans-Semibold.eot?#iefix) format('embedded-opentype'),  url(#{$fonts-path}/OpenSans-Semibold.woff) format('woff'), url(#{$fonts-path}/OpenSans-Semibold.ttf)  format('truetype'), url(#{$fonts-path}/OpenSans-Semibold.svg#OpenSans-Semibold) format('svg');
+}
+
+@font-face {
+    font-family: 'Oswald';
+    src: url(#{$fonts-path}/Oswald-Light.eot?#iefix) format('embedded-opentype'),  url(#{$fonts-path}/Oswald-Light.otf)  format('opentype'),
+    url(#{$fonts-path}/Oswald-Light.woff) format('woff'), url(#{$fonts-path}/Oswald-Light.ttf)  format('truetype'), url(#{$fonts-path}/Oswald-Light.svg#Oswald-Light) format('svg');
+}

@@ -1,0 +1,111 @@
+{% extends "TSAppBundle::layout.html.twig" %}
+
+{% block title %}
+  Ajouter un produit - {{ parent() }}
+{% endblock %}
+
+{% block ts_app_body %}
+
+<div class="well">
+  
+<form  class="form-horizontal" action="{{ path('ts_app_product_add') }}" 
+       {{ form_enctype(form) }} method="POST">
+    <fieldset>
+    <legend>Ajouter un produit</legend>
+    <div  id="fos_user_registration_form">
+        
+        <div class="form-group">
+        <label class="col-lg-2 control-label">Titre de l'article</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'Décrire le produit en mots clés'} }) }}
+        {{ form_errors(form.title) }}
+        </div>
+        </div>
+        <div class="input-file">
+            <span class="step">1</span>
+            <span class="optional">(facultatif)</span>
+            {{ form_errors(form.photoFile) }}
+            {{ form_widget(form.photoFile) }}
+        </div>
+        
+        <div class="form-group">
+        <label class="col-lg-2 control-label">Description</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.description, { 'attr': {'class': 'form-control', 'placeholder': 'Donner un peu plus de détails'} }) }}
+        {{ form_errors(form.description) }}
+        </div>
+        </div>
+                
+        <div class="form-group">
+      <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Image du produit</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.image.file, { 'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.image.file) }}
+        </div>
+        </div>
+        
+         <div class="form-group">
+      <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Marque / Maison </label>
+        <div class="col-lg-10">
+        {{ form_widget(form.brand, { 'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.brand) }}
+        </div>
+        </div>  
+        
+        <div class="form-group">
+      <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Catégorie du produit</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.category, { 'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.category) }}
+        </div>
+        </div>
+        
+        <div class="form-group">
+      <label for="select" class="col-lg-2 control-label">Taille</label>
+      <div class="col-lg-10">
+          {{ form_widget(form.size, { 'attr': {'class': 'form-control' }}) }}
+          {{ form_errors(form.size) }}
+      </div>
+    </div>
+
+        
+        <div class="form-group">
+        <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Etat du produit</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.quality, { 'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.quality) }}
+        </div>
+        </div>
+        
+        
+        <div class="form-group">
+        <label for="inputPasswordConfirmation" class="col-lg-2 control-label">Couleur</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.color, { 'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.color) }}
+        </div>
+        </div>
+
+        
+        <div class="form-group">
+        <label for="inputUsername" class="col-lg-2 control-label">Prix</label>
+        <div class="col-lg-10">
+        {{ form_widget(form.price, { 'attr': {'class': 'form-control', 'placeholder': 'Prix de vente'} }) }}
+        {{ form_errors(form.price) }}
+        </div>
+        </div>
+        
+        
+
+        {{ form_rest(form) }}
+
+    </div>
+      <div style="text-align: center;">
+    <input class="btn btn-primary"  type="submit" value="Ajouter le produit" />
+      </div>
+     </fieldset>
+</form>
+  
+</div>
+
+{% endblock %}

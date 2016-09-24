@@ -1,0 +1,64 @@
+{% extends "CoopTilleulsMonDaronBundle::layout.html.twig" %}
+
+{% set url = url("cooptilleuls_mondaron_pay_index", { "randomKey": purchase.randomKey }) %}
+
+{% block title %}{{ parent() }} | URL{% endblock %}
+
+{% block content %}
+    {% if purchase.photoName %}<div class="image-upload block" style="background-image: url({{ vich_uploader_asset(purchase, 'photoFile') }})"></div>{% endif %}
+
+    <div class="block mint send-description{% if purchase.photoName is null %} empty-picture{% endif %}">
+        <div class="table">
+            <div class="table-cell">
+                <p>Choisis le message à envoyer à la personne qui va payer. Envoie lui ensuite par SMS ton message et attends qu'elle paye à distance.</p>
+                Tu recevras ensuite un SMS te permettant de sortir sans claquer de thunes.
+            </div>
+        </div>
+    </div>
+
+    <div id="textarea" class="block{% if purchase.photoName is null %} empty-picture{% endif %}"  contenteditable="true">
+        <p id="message">{{ messages[0] }}</p>
+        <span id="payUrl" class="url" contenteditable="false">{{ url }}</span>
+    </div>
+
+    <button id="changeMessage" class="block small btn"><span class="step">1</span>Choisis ton message</button>
+
+    <a id="openSms" href="sms:&body={{ (messages[0] ~ ' ' ~ url("cooptilleuls_mondaron_pay_index", { "randomKey": purchase.randomKey }))|url_encode }}">
+        <div class="table">
+            <div class="table-cell">
+                <span class="step">2</span>
+                Envoie le message
+            </div>
+        </div>
+    </a>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            var url = {{ url|json_encode|raw }};
+            var messages = {{ messages|json_encode|raw }};
+            var currentMessage = 0;
+            var payUrlCopy = $('#payUrl').clone();
+
+            $('#textarea').on('change blur keyup paste copy cut mouseup', function () {
+                if (!$('#payUrl').length) $('#textarea').append(payUrlCopy);
+            });
+
+            $('#changeMessage').on('click', function () {
+                currentMessage++;
+                var message = messages[currentMessage % messages.length];
+
+                $('#message').html(message);
+                $('#openSms').attr('href', 'sms:&body=' + encodeURIComponent(message + ' ' + url));
+            });
+
+            if(navigator.userAgent.match(/iPhone/i)) {
+                $('#openSms').addClass('ios');
+                $('#textarea').addClass('ios');
+            }
+        })
+    </script>
+{% endblock %}

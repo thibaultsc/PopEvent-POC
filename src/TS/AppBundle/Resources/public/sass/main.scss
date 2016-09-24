@@ -1,0 +1,275 @@
+@import "variables";
+@import "fonts";
+@import "mixins";
+@import "ask";
+@import "pay";
+
+main {
+    height: 100%;
+
+    .content {
+        height: 100%;
+    }
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: 0 ;
+    font-weight: normal;
+    font-size: 1.7em;
+    white-space: nowrap;
+}
+
+* {
+    outline: none !important;
+    border: none;
+}
+
+//  Global style
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: $font-family-light;
+    text-align: center;
+    color: #ffffff;
+    background-color: $gray-lighter;
+    margin: 0;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+header {
+    background-color: $blue-dark;
+    height: $small-blocks-height;
+    min-height: $header-min-height;
+
+    &.confirm {
+        height: $header-confirm-height;
+    }
+}
+
+.block {
+    display: block;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+
+    &.small {
+        height: $small-blocks-height;
+        min-height: 30px;
+        padding: 0;
+
+        input {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.table {
+    display: table;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 0;
+
+    .table-cell {
+        width: 100%;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+.btn {
+    background-color: $yellow;
+    text-transform: uppercase;
+    font-family: $font-family-bold;
+    color: #ffffff;
+    @include box-shadow();
+    @include border-radius(0);
+
+    &:hover, &:focus, &:active {
+        color: #ffffff;
+        @include box-shadow();
+    }
+}
+
+input, .dropdown {
+    border: none;
+    background-color: $mint-medium;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+input {
+    text-align: center;
+    @include border-radius(0);
+
+    &:focus {
+        &::-webkit-input-placeholder {
+            opacity: 0;
+        }
+
+        &:-moz-placeholder { /* Firefox 18- */
+            opacity: 0;
+        }
+
+        &:-ms-input-placeholder {
+            opacity: 0;
+        }
+    }
+
+    &::-webkit-input-placeholder {
+        font-family: $font-family-regular;
+        text-transform: uppercase;
+        color: #ffffff;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+        font-family: $font-family-regular;
+        text-transform: uppercase;
+        color: #ffffff;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &:-ms-input-placeholder {
+        font-family: $font-family-regular;
+        text-transform: uppercase;
+        color: #ffffff;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.pink {
+    background-color: $pink;
+}
+
+.mint {
+    background-color: $mint-medium;
+}
+.purple {
+    background-color: $purple;
+}
+
+.white {
+    background-color: #ffffff;
+    color: $blue-dark;
+}
+
+.image-upload {
+    height: $image-upload-height;
+    min-height: $image-upload-min-height;
+    background-size: contain;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    padding: 0;
+}
+
+//  Forms errors
+.error-list {
+    background-color: $red-errors;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    z-index: 1;
+
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        margin-left: -4px;
+        display: block;
+        background-color: $red-errors;
+        @include rotate(45deg);
+    }
+
+    li {
+        list-style: none;
+    }
+}
+
+.step {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: $step-size;
+    height: $step-size;
+    line-height: 1.2;
+    z-index: 2;
+
+    @include border-radius(50%);
+    background-color: #ffffff;
+    color: $mint-medium;
+}
+
+.optional {
+    position: absolute;
+    top: 3px;
+    left: 10px + $step-size;
+}
+
+//  404 Page
+.not-found {
+
+    * {
+        box-sizing: border-box;
+    }
+
+    h1 {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    div {
+        padding-top: 40px;
+        padding-bottom: 40px;
+
+        .subtitle {
+            font-size: 1.5em;
+        }
+    }
+}
+
+@media (min-width: 1025px) {
+    main {
+        padding-top: 50px;
+
+        .content {
+            width: 40%;
+            margin: auto;
+            height: 80%;
+        }
+    }
+}
+
+@media (min-width: 1201px) {
+    main {
+        .content {
+            width: 30%;
+        }
+    }
+}
+

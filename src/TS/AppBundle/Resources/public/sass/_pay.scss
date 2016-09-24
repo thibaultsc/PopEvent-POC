@@ -1,0 +1,283 @@
+.main-pay {
+    height: 100%;
+}
+
+//  Index
+.pay-index-description {
+    height: $pay-index-description-height;
+    min-height: $pay-index-description-min-height;
+}
+
+.carousel-container {
+    height: $carousel-height;
+
+    .carousel-preview, .carousel-nav {
+        margin-bottom: 0 !important;
+        background-color: #ffffff;
+
+        div {
+            height: 100%;
+        }
+
+        .item {
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    }
+
+    .carousel-preview {
+        height: $carousel-preview-height;
+
+        button {
+            display: none !important;
+        }
+    }
+
+    .carousel-nav {
+        height: $carousel-nav-height;
+        min-height: $carousel-nav-min-height;
+
+        .slick-active {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .arrow {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: $carousel-arrow-width;
+            background: none;
+            font-size: 2em;
+            color: $yellow;
+
+            &.prev {
+                left: 0;
+            }
+
+            &.next {
+                right: 0;
+            }
+        }
+    }
+
+    &.single {
+        .carousel-preview {
+            height: 100%;
+        }
+        .carousel-nav {
+            display: none;
+        }
+    }
+}
+
+.product-name {
+    background-color: $blue-dark;
+    border-bottom: 1px solid $blue-darker;
+    font-weight: lighter;
+    font-family: $font-family-light;
+    font-size: 1.5em;
+    min-height: $product-name-min-height;
+}
+
+.product-details {
+    height: $product-details-height;
+    min-height: $product-details-min-height;
+    background-color: $blue-dark;
+
+    .row {
+        height: 100%;
+
+        & > div {
+            padding-left: 5px;
+            padding-right: 5px;
+            height: 100%;
+
+            &:not(:last-child) {
+                border-right: 1px solid $blue-darker;
+            }
+        }
+    }
+
+    .title {
+        height: $product-title-height !important;
+        font-size: 0.8em;
+        text-transform: uppercase;
+    }
+
+    .value {
+        height: $product-value-height !important;
+
+        &.size {
+            font-size: 2em;
+        }
+
+        &.price {
+            font-size: 1.3em;
+        }
+
+        &.color {
+            span {
+                display: block;
+                margin: auto;
+                width: $product-color-size;
+                height: $product-color-size;
+                background-color: #ffffff;
+                @include border-radius(50%);
+            }
+        }
+    }
+}
+
+//  Pay
+.pay-title {
+    height: $pay-title-height;
+    min-height: $pay-title-min-height;
+    font-size: 1.2em;
+
+    &.price {
+        font-family: $font-family-bold;
+    }
+}
+
+.card-number {
+    border-bottom: 1px solid $mint-dark;
+}
+
+.pay-form {
+    background-color: $mint-medium;
+
+    &.block {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .select {
+        height: 100%;
+        padding-left: 0;
+        padding-right: 0;
+
+        .selectize-control {
+            height: 100%;
+
+            &.single {
+                .selectize-input {
+                    height: 100%;
+                    background-color: $mint-medium;
+                    border: none;
+                    border-right: 1px solid $mint-dark;
+                    @include border-radius(0);
+                    @include box-shadow();
+
+                    &:after {
+                        border-color: #ffffff transparent transparent transparent;
+                    }
+
+                    & > * {
+                        line-height: 2.3;
+                        color: #ffffff;
+                    }
+
+                    input {
+                        height: 100%;
+                        background-color: $mint-medium;
+
+                        &.input-active {
+                            background-color: transparent;
+                            display: inherit;
+                        }
+                    }
+
+                    &.input-active {
+                        background-color: $mint-medium;
+                    }
+                }
+            }
+
+            .selectize-dropdown {
+                background-color: $mint-medium;
+                color: #ffffff;
+
+                .active {
+                    background-color: #ffffff;
+                    color: $mint-medium;
+                }
+            }
+        }
+    }
+
+    .cryptogram {
+        height: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+
+        input {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+.pay-description {
+    height: $pay-description-height;
+}
+
+.pay-email-form {
+    height: $pay-email-form-height;
+
+    form {
+        height: 100%;
+
+        .block {
+            height: 50%;
+            padding: 0;
+
+            input {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        button {
+            height: 50%;
+        }
+    }
+}
+
+//  Confirm
+.confirm {
+
+    &.pink {
+        height: $confirm-pink-height;
+        min-height: $confirm-pink-min-height;
+        font-size: 1.2em;
+    }
+
+    &.white {
+        height: $confirm-white-height;
+        font-size: 1.2em;
+    }
+
+    &.blue {
+        background-color: $blue-dark;
+        height: $confirm-blue-height;
+        min-height: $confirm-blue-min-height;
+        font-size: 1.2em;
+    }
+}
+
+//  Paid
+.paid-product {
+    height: 30%;
+    font-size: 1.2em;
+}
+
+.paid-status {
+    height: 15%;
+    font-size: 1.2em;
+}
